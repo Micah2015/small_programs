@@ -3,7 +3,7 @@
 # @Author: Micah20150725
 # @Date:   2018-06-19 18:31:59
 # @Last Modified by:   Micah20150725
-# @Last Modified time: 2018-06-20 11:41:12
+# @Last Modified time: 2018-06-21 16:32:03
 
 # https://www.cnblogs.com/yyds/p/6901864.html
 # https://docs.python.org/2/library/logging.handlers.html
@@ -11,7 +11,7 @@
 # 按文件大小 分割LOG文件
 # log_mgr.error(msg) 会将日志存入 fail和log两个之中
 # log_mgr.info(msg)  会将日志存入 success和log两个之中
-# maxBytes为每个log文件的最大值
+# maxBytes为 success.log fail.log文件的最大值, log文件最大值为maxBytes*2
 # backupCount为备份的文件个数
 
 import logging, logging.handlers  
@@ -28,7 +28,7 @@ class LogMgr:
 
         self.SUCCESS = logging.getLogger('log.success')
         loghdlr1 = logging.handlers.RotatingFileHandler(filename=logPath+'/success.log', 
-                                                        mode="a", maxBytes=maxBytes*2, backupCount=backupCount*2)   
+                                                        mode="a", maxBytes=maxBytes, backupCount=backupCount*2)   
         fmt1 = logging.Formatter("%(asctime)s %(message)s", "%Y-%m-%d %H:%M:%S")  
         loghdlr1.setFormatter(fmt1)  
         self.SUCCESS.addHandler(loghdlr1)  
